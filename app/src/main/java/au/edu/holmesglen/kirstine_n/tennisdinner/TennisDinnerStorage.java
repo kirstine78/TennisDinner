@@ -10,5 +10,7 @@ public interface TennisDinnerStorage {
 
     public void addScore(Score score);
 
+    public void deleteScores();
+
     public Collection<Score> getScores();
 }

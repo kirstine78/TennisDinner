@@ -17,14 +17,11 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collection;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String LOGGING_TAG = "KIRSTI: ";
-
-//    public static final String MyTotalScores = "myTotalScores" ;
-//    public static final String TotalScoreTeamHydro = "totalScoreTeamHydroKey";
-//    public static final String TotalScoreTeamDynamite = "totalScoreTeamDynamiteKey";
 
 
     @Override
@@ -34,38 +31,36 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final TennisDinnerStorage tennisDinnerStorage = TennisDinnerStorageSQLite.get(this);
-
-//        sharedpreferences = getSharedPreferences(MyTotalScores, 0);
+        final TennisDinnerStorage tennisDinnerStorage = TennisDinnerStorageSQLite.getInstance(this);
 
         final Button btnAddNewScore = (Button) findViewById(R.id.btnAddNewScore);
+        final Button btnResetScore = (Button) findViewById(R.id.btnResetScore);
 
-
-//        String scoreHydro = sharedpreferences.getString("TotalScoreTeamHydro", "missing");
-//        Log.v("Kirsti", "scoreHydro: " + scoreHydro);
-
-        // set textview to current total score
-//        tvScoreTeamHydro.setText(scoreHydro);
+//        int totalHydro = 0;
+//        int totalDynamite = 0;
+//
+//        Collection<Score> scores = tennisDinnerStorage.getScores();
+//
+//        for (Score currentScore: scores) {
+//            Log.v(LOGGING_TAG, "score: " + currentScore.display());
+//            totalHydro += currentScore.getScoreHydro();
+//            totalDynamite += currentScore.getScoreDynamite();
+//        }
 
         final TextView tvScoreTeamHydro = (TextView) findViewById(R.id.tvTeamHydroScore);
         final TextView tvScoreTeamDynamite = (TextView) findViewById(R.id.tvTeamDynamiteScore);
         final EditText etScoreTeamHydro = (EditText) findViewById(R.id.etTeamHydro);
         final EditText etScoreTeamDynamite = (EditText) findViewById(R.id.etTeamDynamite);
+        final TextView tvDate = (TextView) findViewById(R.id.tvDisplayDate);
 
+        int[] scoreArr = setCurrentStanding(tennisDinnerStorage);
+        tvScoreTeamHydro.setText("" + scoreArr[0]);
+        tvScoreTeamDynamite.setText("" + scoreArr[1]);
 
         btnAddNewScore.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                String FILENAME = "hello_file";
-                String string = "hello world!";
-
-//                FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-//                fos.write(string.getBytes());
-//                fos.close();
-
-
-//                SharedPreferences.Editor editor = sharedpreferences.edit();
 
                 try {
                     // get text view and edit text
@@ -75,14 +70,12 @@ public class MainActivity extends AppCompatActivity {
                     String tvScoreTeamDynamiteValue = tvScoreTeamDynamite.getText().toString();
                     String etScoreTeamDynamiteValue = etScoreTeamDynamite.getText().toString();
 
-                    TextView tvDate = (TextView) findViewById(R.id.tvDisplayDate);
-
                     DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                     Calendar cal  = Calendar.getInstance();
                     cal.setTime(df.parse(tvDate.getText().toString()));
 
                     // create Score object
-                    Score score = new Score(cal, (Integer) Integer.parseInt(tvScoreTeamHydroValue), (Integer) Integer.parseInt(tvScoreTeamDynamiteValue));
+                    Score score = new Score(cal, (Integer) Integer.parseInt(etScoreTeamHydroValue), (Integer) Integer.parseInt(etScoreTeamDynamiteValue));
 
                     // add to storage
                     tennisDinnerStorage.addScore(score);
@@ -102,23 +95,14 @@ public class MainActivity extends AppCompatActivity {
                     tvScoreTeamHydro.setText(strUpdatedScoreTeamHydro);
                     tvScoreTeamDynamite.setText(strUpdatedScoreTeamDynamite);
 
+//                    Collection<Score> scores = tennisDinnerStorage.getScores();
+//
+//                    for (Score currentScore: scores) {
+//                        Log.v(LOGGING_TAG, "score: " + currentScore.display());
+//                    }
 
-                    // update process team dynamite
+                    clearInput(etScoreTeamDynamite, etScoreTeamHydro, tvDate);
 
-
-
-                    // set textview to updated score
-
-//                    editor.putString(TotalScoreTeamHydro, strUpdatedScoreTeamHydro);
-//                    editor.putString(TotalScoreTeamDynamite, strUpdatedScoreTeamDynamite);
-////                    editor.commit();
-//                    editor.apply();
-
-//                    String scoreHydro = sharedpreferences.getString("TotalScoreTeamHydro", "");
-
-
-//                    TextView tvDisplayOfDate= (TextView) findViewById(R.id.tvDisplayDate);
-//                    tvDisplayOfDate.setText("scoreHydro: " + scoreHydro);
                     Toast.makeText(MainActivity.this, "Scores were added", Toast.LENGTH_SHORT).show();
 
                 } catch (NumberFormatException ex) {
@@ -131,14 +115,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        btnResetScore.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                tennisDinnerStorage.deleteScores();
+
+                int[] scoreArr = setCurrentStanding(tennisDinnerStorage);
+                tvScoreTeamHydro.setText("" + scoreArr[0]);
+                tvScoreTeamDynamite.setText("" + scoreArr[1]);
+
+                clearInput(etScoreTeamDynamite, etScoreTeamHydro, tvDate);
+
+                Toast.makeText(MainActivity.this, "Scores were reset", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -166,5 +157,30 @@ public class MainActivity extends AppCompatActivity {
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    public int[] setCurrentStanding(TennisDinnerStorage tennisDinnerStorage) {
+        int totalHydro = 0;
+        int totalDynamite = 0;
+
+        Collection<Score> scores = tennisDinnerStorage.getScores();
+
+        for (Score currentScore: scores) {
+            Log.v(LOGGING_TAG, "score: " + currentScore.display());
+            totalHydro += currentScore.getScoreHydro();
+            totalDynamite += currentScore.getScoreDynamite();
+        }
+
+        int[] arr = new int[2];
+        arr[0] = totalHydro;
+        arr[1] = totalDynamite;
+
+        return arr;
+    }
+
+    public void clearInput(EditText etScoreTeamDynamite, EditText etScoreTeamHydro, TextView date) {
+        date.setText("");
+        etScoreTeamDynamite.setText("");
+        etScoreTeamHydro.setText("");
     }
 }

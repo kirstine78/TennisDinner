@@ -22,7 +22,7 @@
         android:gravity="center"
         android:textSize="24dp"
         android:textStyle="bold"
-        android:textColor="#ffffff"
+        android:textColor="@color/colorTextWhite"
         android:layout_marginBottom="20dp"/>
 
     <LinearLayout
@@ -39,7 +39,7 @@
             android:text="Team Hydro - SLAG"
             android:textSize="16dp"
             android:textStyle="bold"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorTextWhite"
             android:gravity="center" />
 
         <TextView
@@ -50,7 +50,7 @@
             android:text="Team Dynamite"
             android:textSize="16dp"
             android:textStyle="bold"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorTextWhite"
             android:gravity="center" />
     </LinearLayout>
 
@@ -65,8 +65,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="30dp"
-            android:textColor="#ffffff"
-            android:text="50"
+            android:textColor="@color/colorTextWhite"
+            android:text="0"
             android:textStyle="bold"
             android:gravity="center" />
 
@@ -76,26 +76,26 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="30dp"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorTextWhite"
             android:text="0"
             android:textStyle="bold"
             android:gravity="center" />
     </LinearLayout>
 
     <View
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
+        android:background="@color/colorTextWhite"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Add new scores"
         android:textSize="20dp"
-        android:textColor="#ffffff"
+        android:textColor="@color/colorTextWhite"
         android:textStyle="bold"
         android:gravity="center" />
 
@@ -110,7 +110,7 @@
             android:id="@+id/btnTester"
             android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="16dp"
             android:layout_marginLeft="8dp"
             android:background="@drawable/ic_date_range_black_24dp"
             android:onClick="showDatePickerDialog"/>
@@ -120,8 +120,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:textSize="20dp"
-            android:textColor="#ffffff"
+            android:textSize="16dp"
+            android:textColor="@color/colorTextWhite"
+            android:text=""
             android:gravity="center" />
     </LinearLayout>
 
@@ -137,7 +138,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Team Hydro - SLAG"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorTextWhite"
             android:textSize="16dp"
             android:textStyle="bold"
             android:gravity="center" />
@@ -148,7 +149,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Team Dynamite"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorTextWhite"
             android:textSize="16dp"
             android:textStyle="bold"
             android:gravity="center" />
@@ -172,7 +173,7 @@
             android:inputType="number"
             android:layout_weight="1"
             android:textSize="20dp"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorTextWhite"
             android:ems="2" />
 
         <TextView
@@ -194,7 +195,7 @@
             android:inputType="number"
             android:layout_weight="1"
             android:textSize="20dp"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorTextWhite"
             android:ems="2" />
 
         <TextView
@@ -208,8 +209,20 @@
         android:id="@+id/btnAddNewScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="Add new score"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorTextWhite"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:layout_gravity="center"/>
+
+    <Button
+        android:id="@+id/btnResetScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Reset score"
         android:layout_gravity="center"/>
 
 </LinearLayout>
