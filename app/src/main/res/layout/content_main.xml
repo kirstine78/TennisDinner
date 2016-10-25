@@ -112,7 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_marginLeft="8dp"
-            android:background="@drawable/ic_date_range_black_24dp"
+            android:background="@drawable/icon_datepicker"
             android:onClick="showDatePickerDialog"/>
 
         <TextView
@@ -210,19 +210,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Add new score"
+        android:text="Add new scores"
         android:background="@color/colorPrimary"
         android:textColor="@color/colorTextWhite"
         android:paddingRight="16dp"
         android:paddingLeft="16dp"
-        android:layout_gravity="center"/>
-
-    <Button
-        android:id="@+id/btnResetScore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Reset score"
         android:layout_gravity="center"/>
 
 </LinearLayout>

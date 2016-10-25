@@ -1,5 +1,6 @@
 package au.edu.holmesglen.kirstine_n.tennisdinner;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String LOGGING_TAG = "KIRSTI: ";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         final TennisDinnerStorage tennisDinnerStorage = TennisDinnerStorageSQLite.getInstance(this);
-
         final Button btnAddNewScore = (Button) findViewById(R.id.btnAddNewScore);
-        final Button btnResetScore = (Button) findViewById(R.id.btnResetScore);
 
 //        int totalHydro = 0;
 //        int totalDynamite = 0;
@@ -53,9 +51,8 @@ public class MainActivity extends AppCompatActivity {
         final EditText etScoreTeamDynamite = (EditText) findViewById(R.id.etTeamDynamite);
         final TextView tvDate = (TextView) findViewById(R.id.tvDisplayDate);
 
-        int[] scoreArr = setCurrentStanding(tennisDinnerStorage);
-        tvScoreTeamHydro.setText("" + scoreArr[0]);
-        tvScoreTeamDynamite.setText("" + scoreArr[1]);
+        int[] scoreArr = getCurrentStanding(tennisDinnerStorage);
+        setCurrentStanding(scoreArr);
 
         btnAddNewScore.setOnClickListener(new View.OnClickListener() {
 
@@ -114,23 +111,20 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-        btnResetScore.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                tennisDinnerStorage.deleteScores();
-
-                int[] scoreArr = setCurrentStanding(tennisDinnerStorage);
-                tvScoreTeamHydro.setText("" + scoreArr[0]);
-                tvScoreTeamDynamite.setText("" + scoreArr[1]);
-
-                clearInput(etScoreTeamDynamite, etScoreTeamHydro, tvDate);
-
-                Toast.makeText(MainActivity.this, "Scores were reset", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
+
+
+
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        //When BACK BUTTON is pressed, the activity on the stack is restarted
+        //Do what you want on the refresh procedure here
+
+        int[] scoreArr = getCurrentStanding(TennisDinnerStorageSQLite.getInstance(this));
+        setCurrentStanding(scoreArr);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -144,14 +138,21 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        Intent i;
+
+        switch (item.getItemId())  // which menu item has been selected
+        {
+            case R.id.action_history:
+                i = new Intent(this, HistoryActivity.class);
+                startActivity(i);
+                return true;
+            case R.id.action_settings:
+                i = new Intent(this, SettingsActivity.class);
+                startActivity(i);
+                return true;
         }
-
-        return super.onOptionsItemSelected(item);
+        return false;  // nothing happened  no menu items has been selected
     }
 
     public void showDatePickerDialog(View v) {
@@ -159,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
-    public int[] setCurrentStanding(TennisDinnerStorage tennisDinnerStorage) {
+    public int[] getCurrentStanding(TennisDinnerStorage tennisDinnerStorage) {
         int totalHydro = 0;
         int totalDynamite = 0;
 
@@ -176,6 +177,14 @@ public class MainActivity extends AppCompatActivity {
         arr[1] = totalDynamite;
 
         return arr;
+    }
+
+    public void setCurrentStanding(int[] scoreArr) {
+        final TextView tvScoreTeamHydro = (TextView) findViewById(R.id.tvTeamHydroScore);
+        final TextView tvScoreTeamDynamite = (TextView) findViewById(R.id.tvTeamDynamiteScore);
+
+        tvScoreTeamHydro.setText("" + scoreArr[0]);
+        tvScoreTeamDynamite.setText("" + scoreArr[1]);
     }
 
     public void clearInput(EditText etScoreTeamDynamite, EditText etScoreTeamHydro, TextView date) {
