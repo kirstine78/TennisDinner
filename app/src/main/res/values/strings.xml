@@ -2,7 +2,35 @@
     <string name="app_name">TennisDinner</string>
     <string name="action_settings">Settings</string>
     <string name="action_history">History</string>
+    <string name="action_teams">Teams</string>
     <string name="action_main">Home</string>
+
+    <string name="title_activity_main">Tennis Dinner</string>
     <string name="title_activity_history">History</string>
-    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_teams">Teams</string>
+    <string name="title_activity_edit_score">Edit Score</string>
+    <string name="title_activity_rules">Rules</string>
+
+    <string name="teamHydro">Team Hydro - SLAG</string>
+    <string name="teamHydroKurt">Kurt</string>
+
+    <string name="teamHydroLach">Lach</string>
+    <string name="teamDynamite">Team Dynamite</string>
+    <string name="teamDynamiteCraig">Craig</string>
+    <string name="teamDynamiteKirsti">Kirsti</string>
+
+    <string name="current_standing">Current standing</string>
+    <string name="add_new_scores">Add new scores</string>
+
+    <string name="edit_scores">Edit scores</string>
+    <string name="submit_changes">Submit changes</string>
+
+    <string name="rule1">All calls can be disputed, especially by Craig.</string>
+    <string name="rule2">No swearing allowed, penalty applies, especially when Kirstine drops the F-bomb.</string>
+    <string name="rule3">Swap side for every 4 games played, unless the sun annoys Team Dynamite on the serve.</string>
+    <string name="rule4">Play on double court</string>
+    <string name="rule5">Passing Craig down the line is not allowed, or aiming straigt at his old fella.</string>
+    <string name="rule6">Courts shall be watered to the MAX before match start. Kurt will assure that.</string>
+    <string name="rule7">\'Ball on the court\' can be used in any case the point would have been lost by Team Dynamite.</string>
 </resources>

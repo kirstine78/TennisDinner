@@ -67,6 +67,10 @@ public class SettingsActivity extends AppCompatActivity {
                 i = new Intent(this, HistoryActivity.class);
                 startActivity(i);
                 return true;
+            case R.id.action_teams:
+                i = new Intent(this, TeamsActivity.class);
+                startActivity(i);
+                return true;
         }
         return false;  // nothing happened  no menu items has been selected
     }

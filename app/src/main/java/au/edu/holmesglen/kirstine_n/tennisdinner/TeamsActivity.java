@@ -2,56 +2,28 @@ package au.edu.holmesglen.kirstine_n.tennisdinner;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
-public class HistoryActivity extends AppCompatActivity {
+public class TeamsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history);
+        setContentView(R.layout.activity_teams);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        final TennisDinnerStorage tennisDinnerStorage = TennisDinnerStorageSQLite.getInstance(this);
-
-        ListView listView = (ListView) findViewById(R.id.scoresList);
-
-        Score [] scores = tennisDinnerStorage.getScores().toArray(new Score[0]);
-
-        // create adapter we use for the connection between data source and object on screen
-        // the adapter will have the values array...
-        ScoreAdapter adapter = new ScoreAdapter(this, scores);
-
-        listView.setAdapter(adapter);
-
-        // listener
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                // position is which list item is chosen
-                // start new activity
-
-                Intent intent = new Intent(HistoryActivity.this, EditScoreActivity.class);
-                startActivity(intent);
-
-                // get text from list item
-//                Toast.makeText(getApplicationContext(), ((TextView) view).getText(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_history, menu);
+        getMenuInflater().inflate(R.menu.menu_teams, menu);
         return true;
     }
 
@@ -73,11 +45,12 @@ public class HistoryActivity extends AppCompatActivity {
                 i = new Intent(this, SettingsActivity.class);
                 startActivity(i);
                 return true;
-            case R.id.action_teams:
-                i = new Intent(this, TeamsActivity.class);
+            case R.id.action_history:
+                i = new Intent(this, HistoryActivity.class);
                 startActivity(i);
                 return true;
         }
         return false;  // nothing happened  no menu items has been selected
     }
+
 }

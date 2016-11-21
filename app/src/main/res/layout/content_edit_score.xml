@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/content_main"
+    android:id="@+id/content_edit_score"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -10,90 +10,17 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="au.edu.holmesglen.kirstine_n.tennisdinner.MainActivity"
-    tools:showIn="@layout/activity_main"
+    tools:context="au.edu.holmesglen.kirstine_n.tennisdinner.EditScoreActivity"
+    tools:showIn="@layout/activity_edit_score"
     android:orientation="vertical"
     android:background="@drawable/tennis">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/current_standing"
-        android:gravity="center"
-        android:textSize="24dp"
-        android:textStyle="bold"
-        android:textColor="@color/colorTextWhite"
-        android:layout_marginBottom="20dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="10dp">
-
-        <TextView
-            android:id="@+id/tvTeamHydroTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/teamHydro"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:textColor="@color/colorTextWhite"
-            android:gravity="center" />
-
-        <TextView
-            android:id="@+id/tvTeamDynamitetitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/teamDynamite"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:textColor="@color/colorTextWhite"
-            android:gravity="center" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tvTeamHydroScore"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="30dp"
-            android:textColor="@color/colorTextWhite"
-            android:text="0"
-            android:textStyle="bold"
-            android:gravity="center" />
-
-        <TextView
-            android:id="@+id/tvTeamDynamiteScore"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="30dp"
-            android:textColor="@color/colorTextWhite"
-            android:text="0"
-            android:textStyle="bold"
-            android:gravity="center" />
-    </LinearLayout>
-
-    <View
-        android:layout_marginTop="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorTextWhite"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:text="@string/add_new_scores"
+        android:text="@string/edit_scores"
         android:textSize="20dp"
         android:textColor="@color/colorTextWhite"
         android:textStyle="bold"
@@ -204,11 +131,11 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnAddNewScore"
+        android:id="@+id/btnEditScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/add_new_scores"
+        android:text="@string/submit_changes"
         android:background="@color/colorPrimary"
         android:textColor="@color/colorTextWhite"
         android:paddingRight="16dp"

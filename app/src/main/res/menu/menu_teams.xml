@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="au.edu.holmesglen.kirstine_n.tennisdinner.MainActivity">
+    tools:context="au.edu.holmesglen.kirstine_n.tennisdinner.TeamsActivity">
 
     <item
         android:id="@+id/action_main"
@@ -11,14 +11,14 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_teams"
+        android:id="@+id/action_history"
         android:orderInCategory="10"
-        android:title="@string/action_teams"
+        android:title="@string/action_history"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_history"
+        android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:title="@string/action_history"
+        android:title="@string/action_settings"
         app:showAsAction="never" />
 </menu>

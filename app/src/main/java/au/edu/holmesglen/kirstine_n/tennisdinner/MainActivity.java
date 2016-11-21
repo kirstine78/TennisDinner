@@ -34,17 +34,6 @@ public class MainActivity extends AppCompatActivity {
         final TennisDinnerStorage tennisDinnerStorage = TennisDinnerStorageSQLite.getInstance(this);
         final Button btnAddNewScore = (Button) findViewById(R.id.btnAddNewScore);
 
-//        int totalHydro = 0;
-//        int totalDynamite = 0;
-//
-//        Collection<Score> scores = tennisDinnerStorage.getScores();
-//
-//        for (Score currentScore: scores) {
-//            Log.v(LOGGING_TAG, "score: " + currentScore.display());
-//            totalHydro += currentScore.getScoreHydro();
-//            totalDynamite += currentScore.getScoreDynamite();
-//        }
-
         final TextView tvScoreTeamHydro = (TextView) findViewById(R.id.tvTeamHydroScore);
         final TextView tvScoreTeamDynamite = (TextView) findViewById(R.id.tvTeamDynamiteScore);
         final EditText etScoreTeamHydro = (EditText) findViewById(R.id.etTeamHydro);
@@ -151,8 +140,12 @@ public class MainActivity extends AppCompatActivity {
                 i = new Intent(this, SettingsActivity.class);
                 startActivity(i);
                 return true;
+            case R.id.action_teams:
+                i = new Intent(this, TeamsActivity.class);
+                startActivity(i);
+                return true;
         }
-        return false;  // nothing happened  no menu items has been selected
+        return false;  // nothing happened, no menu items has been selected
     }
 
     public void showDatePickerDialog(View v) {

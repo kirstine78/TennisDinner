@@ -5,7 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -35,7 +38,21 @@ public class TennisDinnerStorageSQLite implements TennisDinnerStorage {
     }
 
     public Score getScore(UUID id) {
-        return null;
+        String sqlQuery = "Select * from " + TennisTable.NAME + " where UUID=" + id + ";";
+        Cursor cursor = mDatabase.rawQuery(sqlQuery, null);
+        cursor.moveToFirst();
+
+        String calendarStr = cursor.getString(cursor.getColumnIndex("DATE"));
+        Integer scoreTeamHydro = Integer.parseInt(cursor.getString(cursor.getColumnIndex("HYDRO_SCORE")));
+        Integer scoreTeamDynamite = Integer.parseInt(cursor.getString(cursor.getColumnIndex("DYNAMITE_SCORE")));
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal  = Calendar.getInstance();
+//        cal.setTime(df.parse(tvDate.getText().toString()));
+
+
+        Score score = new Score(cal, scoreTeamHydro, scoreTeamDynamite);
+        return score;
     }
 
     @Override
@@ -45,14 +62,16 @@ public class TennisDinnerStorageSQLite implements TennisDinnerStorage {
         mDatabase.insert(TennisTable.NAME, null, values);
     }
 
-    public void updateScore(Score score) {
-        String uuidString = score.getId().toString();
-        ContentValues values = getContentValues(score);
 
-        mDatabase.update(TennisTable.NAME, values,
-                TennisTable.Cols.UUID + " = ?",
-                new String[] {uuidString});
-    }
+//    @Override
+//    public void updateScore(Score score) {
+//        String uuidString = score.getId().toString();
+//        ContentValues values = getContentValues(score);
+//
+//        mDatabase.update(TennisTable.NAME, values,
+//                TennisTable.Cols.UUID + " = ?",
+//                new String[] {uuidString});
+//    }
 
 
     private void deleteScores(String whereClause, String[] whereArgs) {
