@@ -1,5 +1,8 @@
 package au.edu.holmesglen.kirstine_n.tennisdinner;
 
+import android.util.Log;
+
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.UUID;
 
@@ -7,7 +10,7 @@ import java.util.UUID;
  * Created by Kirsti on 20/10/2016.
  */
 
-public class Score {
+public class Score implements Serializable {
     UUID id;
     Calendar date;
     Integer scoreHydro;
@@ -27,7 +30,8 @@ public class Score {
 
 
     public String display() {
-        return "id: " + id + ", date: " + date.getTime() + ", hydro: " + scoreHydro + ", dynamite: " + scoreDynamite;
+//        return "id: " + id + ", date: " + date.getTime() + ", hydro: " + scoreHydro + ", dynamite: " + scoreDynamite;
+        return getPrettyDateString() + "\nHydro: " + scoreHydro + "\nDynamite: " + scoreDynamite;
     }
 
     public UUID getId() {
@@ -60,5 +64,24 @@ public class Score {
 
     public void setScoreDynamite(Integer scoreDynamite) {
         this.scoreDynamite = scoreDynamite;
+    }
+
+    private String getPrettyDateString() {
+        String dateStr = date.getTime().toString();
+        String strFront = dateStr.substring(0, 10);
+        String strEnd = dateStr.substring(dateStr.length() - 4);
+        return strFront + " " + strEnd;
+    }
+
+    public String getDateForTextView() {
+
+        int year = date.get(Calendar.YEAR);
+        int month = date.get(Calendar.MONTH) + 1;
+        int day = date.get(Calendar.DAY_OF_MONTH);
+        Log.v("Kirsti", "year: " + year);
+        Log.v("Kirsti", "month: " + month);
+        Log.v("Kirsti", "day: " + day);
+
+        return year + "-" + month + "-" + day;
     }
 }

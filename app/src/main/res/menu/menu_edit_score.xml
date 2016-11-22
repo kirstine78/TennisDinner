@@ -2,12 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="au.edu.holmesglen.kirstine_n.tennisdinner.MainActivity">
+    tools:context="au.edu.holmesglen.kirstine_n.tennisdinner.EditScoreActivity">
 
     <item
         android:id="@+id/action_main"
         android:orderInCategory="1"
         android:title="@string/action_main"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_history"
+        android:orderInCategory="5"
+        android:title="@string/action_history"
         app:showAsAction="never" />
 
     <item
@@ -17,8 +23,8 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_history"
-        android:orderInCategory="5"
-        android:title="@string/action_history"
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
         app:showAsAction="never" />
 </menu>

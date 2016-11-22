@@ -41,7 +41,7 @@ public class ScoreCursorWrapper extends CursorWrapper {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Log.v("Kirsti:", dateStr);
+        Log.v("Kirsti", dateStr);
 
 
         Score score = new Score(UUID.fromString(uuidString), c, scoreHydro, scoreDynamite);

@@ -47,17 +47,18 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                // get text view and edit text
+                String tvScoreTeamHydroValue = tvScoreTeamHydro.getText().toString();
+                String etScoreTeamHydroValue = etScoreTeamHydro.getText().toString();
+
+                String tvScoreTeamDynamiteValue = tvScoreTeamDynamite.getText().toString();
+                String etScoreTeamDynamiteValue = etScoreTeamDynamite.getText().toString();
+
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                Calendar cal  = Calendar.getInstance();
 
                 try {
-                    // get text view and edit text
-                    String tvScoreTeamHydroValue = tvScoreTeamHydro.getText().toString();
-                    String etScoreTeamHydroValue = etScoreTeamHydro.getText().toString();
 
-                    String tvScoreTeamDynamiteValue = tvScoreTeamDynamite.getText().toString();
-                    String etScoreTeamDynamiteValue = etScoreTeamDynamite.getText().toString();
-
-                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                    Calendar cal  = Calendar.getInstance();
                     cal.setTime(df.parse(tvDate.getText().toString()));
 
                     // create Score object
@@ -80,12 +81,6 @@ public class MainActivity extends AppCompatActivity {
                     // set textview to updated score
                     tvScoreTeamHydro.setText(strUpdatedScoreTeamHydro);
                     tvScoreTeamDynamite.setText(strUpdatedScoreTeamDynamite);
-
-//                    Collection<Score> scores = tennisDinnerStorage.getScores();
-//
-//                    for (Score currentScore: scores) {
-//                        Log.v(LOGGING_TAG, "score: " + currentScore.display());
-//                    }
 
                     clearInput(etScoreTeamDynamite, etScoreTeamHydro, tvDate);
 

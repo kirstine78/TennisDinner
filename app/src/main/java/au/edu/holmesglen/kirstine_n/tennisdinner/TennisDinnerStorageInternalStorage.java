@@ -16,7 +16,12 @@ public class TennisDinnerStorageInternalStorage implements TennisDinnerStorage {
         scores.add(score);
     }
 
-    public void deleteScores() {scores.clear();}
+    public void deleteScores() {
+        scores.clear();
+    }
+
+    public void updateScore(Score score) {
+    }
 
     @Override
     public Collection<Score> getScores() {

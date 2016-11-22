@@ -23,7 +23,7 @@ public class HistoryActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.scoresList);
 
-        Score [] scores = tennisDinnerStorage.getScores().toArray(new Score[0]);
+        final Score [] scores = tennisDinnerStorage.getScores().toArray(new Score[0]);
 
         // create adapter we use for the connection between data source and object on screen
         // the adapter will have the values array...
@@ -37,12 +37,11 @@ public class HistoryActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 // position is which list item is chosen
                 // start new activity
-
                 Intent intent = new Intent(HistoryActivity.this, EditScoreActivity.class);
-                startActivity(intent);
 
-                // get text from list item
-//                Toast.makeText(getApplicationContext(), ((TextView) view).getText(), Toast.LENGTH_SHORT).show();
+                // pass in the whole score object
+                intent.putExtra("aScoreObject", scores[position]);
+                startActivity(intent);
             }
         });
 

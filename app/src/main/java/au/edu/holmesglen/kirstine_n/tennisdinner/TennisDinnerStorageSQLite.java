@@ -63,15 +63,15 @@ public class TennisDinnerStorageSQLite implements TennisDinnerStorage {
     }
 
 
-//    @Override
-//    public void updateScore(Score score) {
-//        String uuidString = score.getId().toString();
-//        ContentValues values = getContentValues(score);
-//
-//        mDatabase.update(TennisTable.NAME, values,
-//                TennisTable.Cols.UUID + " = ?",
-//                new String[] {uuidString});
-//    }
+    @Override
+    public void updateScore(Score score) {
+        String uuidString = score.getId().toString();
+        ContentValues values = getContentValues(score);
+
+        mDatabase.update(TennisTable.NAME, values,
+                TennisTable.Cols.UUID + " = ?",
+                new String[] {uuidString});
+    }
 
 
     private void deleteScores(String whereClause, String[] whereArgs) {

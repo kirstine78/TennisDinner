@@ -18,6 +18,9 @@ public class TennisDinnerStorageInMemory implements TennisDinnerStorage {
 
     public void deleteScores() {scores.clear();}
 
+    public void updateScore(Score score) {
+    }
+
     @Override
     public Collection<Score> getScores() {
         return scores;
