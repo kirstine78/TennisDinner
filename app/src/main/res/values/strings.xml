@@ -25,6 +25,7 @@
 
     <string name="edit_scores">Edit scores</string>
     <string name="submit_changes">Submit changes</string>
+    <string name="cancel_changes">No, Cancel</string>
 
     <string name="rule1">All calls can be disputed, especially by Craig.</string>
     <string name="rule2">No swearing allowed, penalty applies, especially when Kirstine drops the F-bomb.</string>

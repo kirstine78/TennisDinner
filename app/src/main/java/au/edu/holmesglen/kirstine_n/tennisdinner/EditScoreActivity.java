@@ -46,6 +46,7 @@ public class EditScoreActivity extends AppCompatActivity {
         etDynamiteScore.setText(score.getScoreDynamite().toString());
 
         final Button btnSubmitChanges = (Button) findViewById(R.id.btnEditScore);
+        final Button btnCancelToMakeChanges = (Button) findViewById(R.id.btnCancelEditScore);
 
         btnSubmitChanges.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +92,18 @@ public class EditScoreActivity extends AppCompatActivity {
                         Toast.makeText(EditScoreActivity.this, "Pick a date", Toast.LENGTH_SHORT).show();
                     }
                 }
+            }
+        });
+
+        btnCancelToMakeChanges.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // go to another Activity
+                Intent intent = new Intent(EditScoreActivity.this, HistoryActivity.class);
+                startActivity(intent);
+
+                Toast.makeText(getApplicationContext(), "No changes were made", Toast.LENGTH_SHORT).show();
             }
         });
     }
