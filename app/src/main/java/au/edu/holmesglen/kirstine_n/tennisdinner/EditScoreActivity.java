@@ -29,8 +29,8 @@ public class EditScoreActivity extends AppCompatActivity {
     private EditText etDynamiteScore;
     private Score score;
 
-    private String etScoreTeamHydroValue;
-    private String etScoreTeamDynamiteValue;
+    private String scoreTeamHydroValue;
+    private String scoreTeamDynamiteValue;
 
     private TennisDinnerStorage tennisDinnerStorage;
 
@@ -61,6 +61,7 @@ public class EditScoreActivity extends AppCompatActivity {
         etDynamiteScore.setText(score.getScoreDynamite().toString());
 
         final Button btnSubmitChanges = (Button) findViewById(R.id.btnEditScore);
+        final Button btnDeleteScore = (Button) findViewById(R.id.btnDeleteScore);
         final Button btnCancelToMakeChanges = (Button) findViewById(R.id.btnCancelEditScore);
 
         btnSubmitChanges.setOnClickListener(new View.OnClickListener() {
@@ -69,10 +70,10 @@ public class EditScoreActivity extends AppCompatActivity {
             {
 
                 // get text view and edit text
-                etScoreTeamHydroValue = etHydroScore.getText().toString();
-                etScoreTeamDynamiteValue = etDynamiteScore.getText().toString();
+                scoreTeamHydroValue = etHydroScore.getText().toString();
+                scoreTeamDynamiteValue = etDynamiteScore.getText().toString();
 
-                if (etScoreTeamHydroValue.equals("") || etScoreTeamDynamiteValue.equals(""))
+                if (scoreTeamHydroValue.equals("") || scoreTeamDynamiteValue.equals(""))
                 {
                     Toast.makeText(EditScoreActivity.this, "Enter scores", Toast.LENGTH_SHORT).show();
                 }
@@ -81,6 +82,15 @@ public class EditScoreActivity extends AppCompatActivity {
                     // show alert pop up
                     alertMessage();
                 }
+            }
+        });
+
+        btnDeleteScore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                // show alert pop up
+                alertMessageDelete();
             }
         });
 
@@ -146,7 +156,6 @@ public class EditScoreActivity extends AppCompatActivity {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
                         // Yes button clicked
-
                         // update the data for the specific score.
 
                         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -157,11 +166,14 @@ public class EditScoreActivity extends AppCompatActivity {
 
                             // set the values for the score object. Date, score hydro, and score dynamite
                             score.setDate(cal);
-                            score.setScoreHydro(Integer.parseInt(etScoreTeamHydroValue));
-                            score.setScoreDynamite(Integer.parseInt(etScoreTeamDynamiteValue));
+                            score.setScoreHydro(Integer.parseInt(scoreTeamHydroValue));
+                            score.setScoreDynamite(Integer.parseInt(scoreTeamDynamiteValue));
 
                             // save the changes for the score object in storage
                             tennisDinnerStorage.updateScore(score);
+
+                            // wipe fields
+                            emptyFields();
 
                             // go to another Activity
                             Intent intent = new Intent(EditScoreActivity.this, HistoryActivity.class);
@@ -192,4 +204,45 @@ public class EditScoreActivity extends AppCompatActivity {
                 .setNegativeButton(R.string.cancel, dialogClickListener).show();
     }
 
+    public void alertMessageDelete() {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        // Yes button clicked
+                        // delete record for this score
+                        tennisDinnerStorage.deleteOneScore(score);
+
+                        // wipe fields
+                        emptyFields();
+
+                        // go to another Activity
+                        Intent intent = new Intent(EditScoreActivity.this, HistoryActivity.class);
+                        startActivity(intent);
+
+                        Toast.makeText(getApplicationContext(), "Record were deleted", Toast.LENGTH_SHORT).show();
+
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        // No button clicked
+                        // do nothing
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.prompt_delete_score)
+                .setPositiveButton(R.string.yes, dialogClickListener)
+                .setNegativeButton(R.string.cancel, dialogClickListener).show();
+    }
+
+    private void emptyFields() {
+        // get text view and edit text
+        etHydroScore.setText("");
+        etDynamiteScore.setText("");
+        tvDate.setText("");
+    }
 }

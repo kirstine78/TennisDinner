@@ -28,12 +28,14 @@
 
     <string name="edit_scores">Edit scores</string>
     <string name="submit_changes">Submit changes</string>
-    <string name="cancel_changes">No, Go back to History</string>
+    <string name="cancel_changes">Cancel</string>
+    <string name="delete_a_score">Delete score</string>
 
     <string name="cancel">No, Cancel</string>
     <string name="yes">Yes</string>
-    <string name="prompt_delete_all_scores">Are you sure you want to delete ALL scores?</string>
     <string name="prompt_edit_score">Are you sure you want to save changes?</string>
+    <string name="prompt_delete_score">Are you sure you want to delete the scores?</string>
+    <string name="prompt_delete_all_scores">Are you sure you want to delete ALL scores?</string>
 
     <string name="rule1">All calls can be disputed, especially by Craig.</string>
     <string name="rule2">No swearing allowed, penalty applies, especially when Kirstine drops the F-bomb.</string>

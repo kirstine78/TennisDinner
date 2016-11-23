@@ -18,6 +18,8 @@ public class TennisDinnerStorageInMemory implements TennisDinnerStorage {
 
     public void deleteScores() {scores.clear();}
 
+    public void deleteOneScore(Score score){}
+
     public void updateScore(Score score) {
     }
 

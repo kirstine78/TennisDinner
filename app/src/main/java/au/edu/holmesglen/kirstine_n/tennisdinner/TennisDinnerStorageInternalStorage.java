@@ -20,6 +20,8 @@ public class TennisDinnerStorageInternalStorage implements TennisDinnerStorage {
         scores.clear();
     }
 
+    public void deleteOneScore(Score score){}
+
     public void updateScore(Score score) {
     }
 

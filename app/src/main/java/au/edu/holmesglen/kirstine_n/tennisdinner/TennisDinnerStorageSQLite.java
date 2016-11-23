@@ -50,7 +50,6 @@ public class TennisDinnerStorageSQLite implements TennisDinnerStorage {
         Calendar cal  = Calendar.getInstance();
 //        cal.setTime(df.parse(tvDate.getText().toString()));
 
-
         Score score = new Score(cal, scoreTeamHydro, scoreTeamDynamite);
         return score;
     }
@@ -78,8 +77,13 @@ public class TennisDinnerStorageSQLite implements TennisDinnerStorage {
         mDatabase.delete(TennisTable.NAME, whereClause, whereArgs);
     }
 
+
     public void deleteScores() {
         mDatabase.delete(TennisTable.NAME, null, null);
+    }
+
+    public void deleteOneScore(Score score) {
+        mDatabase.delete(TennisTable.NAME, TennisTable.Cols.UUID + "='" + score.getId() + "'", null);
     }
 
     private static ContentValues getContentValues(Score score) {
@@ -100,7 +104,7 @@ public class TennisDinnerStorageSQLite implements TennisDinnerStorage {
                 whereArgs,
                 null,  // group by
                 null,  // having
-                null  // order by
+                TennisTable.Cols.DATE + " DESC"  // order by
         );
 
         return new ScoreCursorWrapper(cursor);

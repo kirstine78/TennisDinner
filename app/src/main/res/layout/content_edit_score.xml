@@ -142,6 +142,18 @@
         android:layout_gravity="center"/>
 
     <Button
+        android:id="@+id/btnDeleteScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/delete_a_score"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorTextWhite"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:layout_gravity="center"/>
+
+    <Button
         android:id="@+id/btnCancelEditScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
