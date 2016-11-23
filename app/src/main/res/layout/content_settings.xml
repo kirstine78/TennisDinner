@@ -47,7 +47,7 @@
         android:textSize="16dp"
         android:textStyle="bold"
         android:textColor="@color/colorTextWhite"
-        android:text="if you press the reset button" />
+        android:text="if you press the delete button" />
 
 
     <View
@@ -66,6 +66,6 @@
         android:textColor="@color/colorTextWhite"
         android:paddingRight="16dp"
         android:paddingLeft="16dp"
-        android:text="Reset scores"/>
+        android:text="Delete ALL scores"/>
 
 </LinearLayout>

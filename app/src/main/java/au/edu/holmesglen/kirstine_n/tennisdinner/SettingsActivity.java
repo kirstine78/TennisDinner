@@ -1,5 +1,7 @@
 package au.edu.holmesglen.kirstine_n.tennisdinner;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,8 @@ import android.widget.Toast;
 
 public class SettingsActivity extends AppCompatActivity {
 
+    private TennisDinnerStorage tennisDinnerStorage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +23,7 @@ public class SettingsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final TennisDinnerStorage tennisDinnerStorage = TennisDinnerStorageSQLite.getInstance(this);
+        tennisDinnerStorage = TennisDinnerStorageSQLite.getInstance(this);
 
         final Button btnResetScore = (Button) findViewById(R.id.btnResetScore);
 
@@ -28,18 +32,10 @@ public class SettingsActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                tennisDinnerStorage.deleteScores();
-
-//                int[] scoreArr = setCurrentStanding(tennisDinnerStorage);
-//                tvScoreTeamHydro.setText("" + scoreArr[0]);
-//                tvScoreTeamDynamite.setText("" + scoreArr[1]);
-//
-//                clearInput(etScoreTeamDynamite, etScoreTeamHydro, tvDate);
-
-                Toast.makeText(SettingsActivity.this, "Scores were reset", Toast.LENGTH_SHORT).show();
+                // show confirm dialog box
+                alertMessage();
             }
         });
-
     }
 
     @Override
@@ -73,6 +69,40 @@ public class SettingsActivity extends AppCompatActivity {
                 return true;
         }
         return false;  // nothing happened  no menu items has been selected
+    }
+
+    public void alertMessage() {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        // Yes button clicked
+
+                        tennisDinnerStorage.deleteScores();
+
+//                int[] scoreArr = setCurrentStanding(tennisDinnerStorage);
+//                tvScoreTeamHydro.setText("" + scoreArr[0]);
+//                tvScoreTeamDynamite.setText("" + scoreArr[1]);
+//
+//                clearInput(etScoreTeamDynamite, etScoreTeamHydro, tvDate);
+
+                        Toast.makeText(SettingsActivity.this, "ALL Scores were deleted", Toast.LENGTH_SHORT).show();
+
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        // No button clicked
+                        // do nothing
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.prompt_delete_all_scores)
+                .setPositiveButton(R.string.yes, dialogClickListener)
+                .setNegativeButton(R.string.cancel, dialogClickListener).show();
     }
 
 }
