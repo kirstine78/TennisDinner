@@ -23,10 +23,12 @@
     <string name="current_standing">Current standing</string>
     <string name="add_new_scores">Add new scores</string>
 
+
+    <string name="pick_row">Click row to edit or delete</string>
+
     <string name="edit_scores">Edit scores</string>
     <string name="submit_changes">Submit changes</string>
     <string name="cancel_changes">No, Go back to History</string>
-
 
     <string name="cancel">No, Cancel</string>
     <string name="yes">Yes</string>

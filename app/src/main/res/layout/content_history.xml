@@ -12,7 +12,17 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="au.edu.holmesglen.kirstine_n.tennisdinner.HistoryActivity"
     tools:showIn="@layout/activity_history"
-    android:background="@drawable/tennis">
+    android:background="@drawable/tennis"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/pick_row"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorTextWhite"/>
 
     <ListView
         android:id="@+id/scoresList"

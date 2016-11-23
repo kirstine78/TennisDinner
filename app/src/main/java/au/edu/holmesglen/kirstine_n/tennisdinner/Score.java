@@ -31,7 +31,7 @@ public class Score implements Serializable {
 
     public String display() {
 //        return "id: " + id + ", date: " + date.getTime() + ", hydro: " + scoreHydro + ", dynamite: " + scoreDynamite;
-        return getPrettyDateString() + "\nHydro: " + scoreHydro + "\nDynamite: " + scoreDynamite;
+        return getPrettyDateString() + "\nTeam Hydro - SLAG: " + scoreHydro + "\nTeam Dynamite: " + scoreDynamite;
     }
 
     public UUID getId() {
