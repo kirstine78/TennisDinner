@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -125,6 +127,20 @@ public class TennisDinnerStorageSQLite implements TennisDinnerStorage {
         } finally {
             cursor.close();
         }
+
+        // sort the scores by date desc
+        sortScoresByDateDesc(scores);
+
         return scores;
+    }
+
+    private void sortScoresByDateDesc(List<Score> scoresList) {
+
+        Collections.sort(scoresList, new Comparator<Score>() {
+            public int compare(Score score1, Score score2) {
+                // sort desc by date
+                return score2.getDate().compareTo(score1.getDate());
+            }
+        });
     }
 }
